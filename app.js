@@ -21,7 +21,7 @@ app.post("/character",(req,res)=>
 
 app.post("/game.html",(req,res) => {
      console.log(req.body);
-    res.send(req.body);
+    res.send(player);
 });
    
 //$post to replace page look into

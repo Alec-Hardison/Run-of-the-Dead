@@ -14,6 +14,18 @@
             <button id = "start">Are You Ready?</button>
         </body>
     <script>
-        
+       
+                    axios.post("/game.html",{
+                    
+                    })
+                .then(function(res)
+                     {
+                        console.log(res.data);
+                    })
+                .catch(function(error)
+                      {
+                        console.log(error);
+                    })
+           
         </script>
 </html>
