@@ -9,23 +9,89 @@
         <title></title>
     </head>
     <h1></h1>
+        <input id = "clock" disabled>
         <body>
-           
-            <button id = "start">Are You Ready?</button>
+            <div id = game>
+           <input type = "text" name = "console" id = "console">
+            <button id = "enter">ENTER</button>
+                <button id = answer></button>
+            </div>
+            <div id = "start">
+                <p>information on how to play</p>
+                <button id = "start">START</button>
+            </div>
         </body>
     <script>
-       
+        $("#game").hide();
+       var $console = document.getElementById("console").value;
+       var time = 10;
+	   var minutes;
+	   var seconds;
+	 
+
+        function clock()
+        {
+	  var t = setInterval(function()
+                {
+		  console.log(time)
+		    minutes = Math.floor(time /60)
+		    seconds = Math.floor(time%60)
+			if(minutes <=0 && seconds<=0)
+			{
+				time = 1;
+			}
+		  time--
+		  document.getElementById("clock").value = minutes + ":" + seconds;
+		  if(seconds <= 0 && minutes <=0)
+			{
+				clearInterval(t);
+			}
+		  console.log(minutes);
+		  console.log(seconds);
+	  },1000);
+	   }
+        $("#answer").click(function()
+                          {
+            axios.post("/answer",{
+                answer:document.getElementById("console").value
+            })
+            .then(function(res)
+                 {
+                
+            })
+            .cath(function(error)
+                 {
+                console.log(error)
+            })
+        });
+        $("#start").click(function()
+                         {
+            console.log("hi");
+           $("#start").hide();
+            $("#game").show();
+            clock();
+        });
+
+        $("#enter").click(function()
+                        {
                     axios.post("/game.html",{
-                    
+                        "console":document.getElementById("console").value
                     })
                 .then(function(res)
                      {
+                        console.log("this is the response");
+                        var paragraph = $("<p></p>");
+                        paragraph.text(res.data);
+                        $("#console").before(paragraph);
                         console.log(res.data);
                     })
                 .catch(function(error)
                       {
                         console.log(error);
                     })
-           
+        });
+         
+	 
+
         </script>
 </html>
