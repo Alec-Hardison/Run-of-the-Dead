@@ -45,6 +45,7 @@
 		  if(seconds <= 0 && minutes <=0)
 			{
 				clearInterval(t);
+                gameover();
 			}
 		  console.log(minutes);
 		  console.log(seconds);
@@ -80,10 +81,11 @@
                 .then(function(res)
                      {
                         console.log("this is the response");
-                        var paragraph = $("<p></p>");
+                        var paragraph = $("<p></p>").prop("class","par");;
                         paragraph.text(res.data);
                         $("#console").before(paragraph);
                         console.log(res.data);
+                        console.log(paragraph.prop("id"));
                     })
                 .catch(function(error)
                       {
@@ -91,7 +93,10 @@
                     })
         });
          
-	 
+	 function gameover()
+        {
+            $("body").css("background-color","red");
+        }
 
         </script>
 </html>
